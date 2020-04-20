@@ -10,5 +10,8 @@
 - Frontend: Thymeleaf
 - Build: Gradle
 
-# 수정내역
+# 수정내역 
 
+- Board Entity 및 Repo 추가
+- Board 더미데이터 추가 테스트
+- 기본 컨트롤러 추가
