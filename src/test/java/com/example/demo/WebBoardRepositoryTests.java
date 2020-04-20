@@ -52,4 +52,18 @@ public class WebBoardRepositoryTests {
             log.info("-----------------------");
             result.getContent().forEach(board -> log.info("" + board));
         }
+    
+    @Test
+        public void testList2(){
+
+            Pageable pageable = PageRequest.of(0, 20, Direction.DESC , "bno");
+
+            Page<WebBoard> result = repo.findAll(
+                repo.makePredicate("t", "10"), pageable);
+
+            log.info("Page: " + result.getPageable());
+
+            log.info("-----------------------");
+            result.getContent().forEach(board -> log.info("" + board));
+        }
 }
