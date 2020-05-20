@@ -1,0 +1,94 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">공지사항</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="row">
+                    <div class="col-sm-12 col-md-7"></div>
+                    <div class="col-sm-12 col-md-5" style="display: inline-block; text-align: right;">
+                        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="/noticeSearch" method="GET">
+                            <div class="input-group">
+                                <!--   <label>Search: </label>-->
+                                <input name="keyword" type="text" class="form-control bg-light border-0 small" placeholder="검색어를 입력해주세요" aria-label="Search" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <table class="table table-hover" id="dataTable" width="100%" cellspacing="0" style="text-align: center;">
+                        <thead>
+                            <tr>
+                                <th width="10%" scope="row">번호</th>
+                                <th width="45%" scope="row">제목</th>
+                                <th width="15%" scope="row">작성자</th>
+                                <th width="30%" scope="row">작성시간</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="notice : ${noticeLists}">
+                                <td width="10%">
+                                    <span th:text="${notice.n_id}"></span>
+                                </td>
+                                <td width="45%">
+                                    <a th:href="@{'/noticeDetail/'+${notice.n_id}}">
+                                        <span th:text="${notice.title}"></span>([[${notice.viewCnt/2}]])
+                                    </a>
+                                </td>
+                                <td width="15%">
+                                    <span th:text="${notice.writer}"></span>
+                                </td>
+                                <td width="30%">
+                                    <span th:text="${#temporals.format(notice.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-12 col-md-1"></div>
+                <div class="col-sm-12 col-md-9">
+                    <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                        <ul class="pagination">
+                            <div th:if="${curPage} != 1">
+                                <li class="paginate_button page-item" id="dataTable_previous">
+                                    <a th:href="@{'/notice/?page=' + ${curPage - 1}}" aria-controls="dataTable" class="page-link">
+                                        ◀</a>
+                                </li>
+                            </div>
+                            <span th:each="pageNum : ${pageList}" th:inline="text">
+                                <div th:if="${pageNum} != null">
+                                    <li class="paginate_button page-item" id="dataTable">
+                                        <a th:href="@{'/notice/?page=' + ${pageNum}}" aria-controls="dataTable" class="page-link">[[${pageNum}]]</a>
+                                    </li>
+                                </div>
+                            </span>
+                            <div th:if="${curPage} != ${totalLastPageNum}">
+                                <li class="paginate_button page-item" id="dataTable_previous">
+                                    <a th:href="@{'/notice/?page=' + ${curPage + 1}}" aria-controls="dataTable" class="page-link">
+                                        ▶</a>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-2" style="text-align: right;">
+                    <a class="btn btn-primary" th:href="@{/addNotice}" role="button">글 작성</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->

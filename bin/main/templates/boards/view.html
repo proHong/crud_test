@@ -1,7 +1,7 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout1}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/index}">
 
 <div layout:fragment="content">
-
+    <form th:action="${'/login'}"></form>
     <div class="card-header">View Page</div>
     <div class="card-body">
         <div class="container">
@@ -27,8 +27,8 @@
                 <label>RegDate</label> <input class="form-control" name="regDate" th:value="${#dates.format(vo.regdate,'yyyy-MM-dd')}" readonly="readonly" />
             </div>
 
-            <div class="float-right">
-                <a th:href="@{ modify(page=${pageVO.page}, 
+            <div class="float-right" th:with="uid=${#authentication.principal} eq 'anonymousUser'?'Guest':${#authentication.principal.member.uid}">
+                <a th:if="${uid} eq ${vo.writer}" th:href="@{ modify(page=${pageVO.page}, 
                                 size=${pageVO.size}, 
                                 type=${pageVO.type}, 
                                 keyword=${pageVO.keyword},
@@ -108,6 +108,7 @@
             var rno;
 
             $("#addReplyBtn").on('click', function() {
+
 
                 $("#myModal").modal("show");
                 $(".modal-title").text("Add Reply");

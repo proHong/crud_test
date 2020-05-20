@@ -1,0 +1,17 @@
+<div class="container" style="overflow: hidden; position: relative;">
+    <br><b style="font-size: 30px;">공지사항</b>
+</div>
+
+<div class="container">
+    <form class="text-center p-5" method="post" th:action="@{'/noticeUpdate/' + ${noticeDto.n_id}}">
+        <input type="hidden" name="_method" value="put" />
+        <input type="hidden" name="id" th:value="${noticeDto.n_id}" />
+        <input type="text" class="form-control" name="title" th:value="${noticeDto.title}" required>
+        <br>
+        <input type="text" class="form-control" name="writer" th:value="${noticeDto.writer}" required>
+        <br>
+        <textarea class="form-control" rows="20" name="content" th:value="${noticeDto.content}" th:text="${noticeDto.content}" required></textarea>
+        <br>
+        <button type="submit" class="btn btn-info btn-block">수정하기</button>
+    </form>
+</div>

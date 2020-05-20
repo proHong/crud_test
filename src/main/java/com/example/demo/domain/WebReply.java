@@ -1,4 +1,5 @@
 package com.example.demo.domain;
+
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;

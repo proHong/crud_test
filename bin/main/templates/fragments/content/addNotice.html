@@ -1,0 +1,15 @@
+<div class="container" style="overflow: hidden; position: relative;">
+    <br><b style="font-size: 30px;">공지사항</b>
+</div>
+
+<div class="container">
+    <form class="text-center p-5" method="post" th:action="@{/addNotice}" th:object="${notice}">
+        <input type="text" class="form-control" placeholder="제목" name="title" th:field="*{title}" value="" required>
+        <br>
+        <input type="text" class="form-control" placeholder="작성자" name="writer" th:field="*{writer}" value="" required>
+        <br>
+        <textarea class="form-control" rows="20" placeholder="내용" name="content" th:field="*{content}" value="" required></textarea>
+        <br>
+        <button type="submit" class="btn btn-info btn-block">작성하기</button>
+    </form>
+</div>
